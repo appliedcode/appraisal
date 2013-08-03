@@ -13,11 +13,12 @@ module AcceptanceTestHelpers
 
     before :all do
       initialize_aruba_instance_variables
+      build_default_dummy_gems
     end
 
     before do
       cleanup_artifacts
-      build_default_dummy_gems
+      build_default_gemfile
       unset_bundler_env_vars
       ENV["GEM_PATH"] = [TMP_GEM_ROOT, ENV["GEM_PATH"]].join(":")
     end
@@ -59,6 +60,8 @@ module AcceptanceTestHelpers
     @announce_cmd = nil
     @announce_dir = nil
     @announce_env = nil
+    @aruba_timeout_seconds = nil
+    @aruba_io_wait_seconds = nil
   end
 
   def build_default_dummy_gems
@@ -67,6 +70,9 @@ module AcceptanceTestHelpers
 
     build_gem 'dummy', '1.0.0'
     build_gem 'dummy', '1.1.0'
+  end
+
+  def build_default_gemfile
     build_gemfile <<-Gemfile
       source 'https://rubygems.org'
 
