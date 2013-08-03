@@ -60,7 +60,7 @@ module AcceptanceTestHelpers
     @announce_cmd = nil
     @announce_dir = nil
     @announce_env = nil
-    @aruba_timeout_seconds = nil
+    @aruba_timeout_seconds = 30
     @aruba_io_wait_seconds = nil
   end
 
@@ -77,7 +77,7 @@ module AcceptanceTestHelpers
       source 'https://rubygems.org'
 
       gem 'dummy'
-      gem 'appraisal', :path => '../../'
+      gem 'appraisal', :path => '#{PROJECT_ROOT}'
     Gemfile
   end
 
